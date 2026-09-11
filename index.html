@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduPulse ERP | Next-Gen School Management Platform</title>
+  <style>
+    /* --- CSS RESET & COLOR THEMES (LIGHT & DARK) --- */
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-soft: #eff6ff;
+      --secondary: #0f172a;
+      --accent: #10b981;
+      --accent-soft: #ecfdf5;
+      --text: #334155;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 16px 24px -4px rgba(37, 99, 235, 0.12), 0 6px 10px -4px rgba(0, 0, 0, 0.05);
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --hero-bg: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+      --contact-gradient: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%);
+      --contact-card-bg: rgba(255, 255, 255, 0.12);
+      --transition: all 0.25s ease-in-out;
+    }
+
+    [data-theme="dark"] {
+      --primary: #38bdf8;
+      --primary-light: #60a5fa;
+      --primary-soft: #0c213d;
+      --secondary: #f8fafc;
+      --accent: #34d399;
+      --accent-soft: #063d27;
+      --text: #cbd5e1;
+      --text-muted: #94a3b8;
+      --bg: #0b1329;
+      --card-bg: #132238;
+      --border: #1e3352;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 16px 28px -4px rgba(56, 189, 248, 0.18), 0 6px 12px -4px rgba(0, 0, 0, 0.3);
+      --header-bg: rgba(11, 19, 41, 0.92);
+      --hero-bg: radial-gradient(circle at 50% 0%, #172d54 0%, #0b1329 80%);
+      --contact-gradient: linear-gradient(135deg, #0f172a 0%, #172554 50%, #1e3a8a 100%);
+      --contact-card-bg: rgba(255, 255, 255, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    /* --- NAVIGATION --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    .brand span.icon {
+      font-size: 1.5rem;
+    }
+
+    .nav-right-group {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.925rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Modern Circular Dark Mode Toggle Button */
+    .theme-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--primary-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08);
+      border-color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-soft);
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--secondary);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+      background: var(--hero-bg);
+    }
+
+    .hero-content {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 0.95rem;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: 2.85rem;
+      font-weight: 800;
+      color: var(--secondary);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* --- SECTIONS COMMON STYLING --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.1rem;
+      color: var(--secondary);
+      margin-bottom: 0.65rem;
+      font-weight: 800;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.85rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      margin-bottom: 1.25rem;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .sub-features {
+      list-style: none;
+      margin-top: 0.75rem;
+      border-top: 1px dashed var(--border);
+      padding-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .sub-features li {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .sub-features li strong {
+      color: var(--secondary);
+    }
+
+    .check-bullet {
+      color: var(--accent);
+      font-weight: bold;
+      line-height: 1.2;
+    }
+
+    .k12-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+
+    /* --- REPLACED SECTION: PREMIUM CONTACT INFO BANNER --- */
+    .contact-banner {
+      background: var(--contact-gradient);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-banner::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .contact-banner h2 {
+      color: #ffffff;
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-banner p.subtext {
+      color: #e2e8f0;
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    .contact-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-pill {
+      background: var(--contact-card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-align: left;
+      transition: var(--transition);
+    }
+
+    .contact-pill:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
+    }
+
+    .contact-pill .pill-icon {
+      font-size: 2.2rem;
+    }
+
+    .contact-pill .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+
+    .contact-pill a.value {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+    }
+
+    .contact-pill a.value:hover {
+      text-decoration: underline;
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-call {
+      background-color: #10b981;
+      color: #ffffff;
+      padding: 0.85rem 1.8rem;
+      border-radius: 10px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-call:hover {
+      background-color: #059669;
+      transform: translateY(-2px);
+    }
+
+    .btn-mail {
+      background-color: #ffffff;
+      color: #0f172a;
+      padding: 0.85rem 1.8rem;
+      border-radius: 10px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-mail:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-2px);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.15rem;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .contact-grid {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .contact-pill {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <span class="icon">🏫</span> EduPulse ERP
+      </a>
+      
+      <div class="nav-right-group">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#rbac">Access Roles</a></li>
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#exams">Assessment</a></li>
+          <li><a href="#finance">Finance</a></li>
+          <li><a href="#operations">Operations</a></li>
+          <li><a href="#analytics">Analytics</a></li>
+          <li><a href="#k12">K-12 Suite</a></li>
+          <li><a href="#contact" class="btn contact-btn">Contact Us</a></li>
+        </ul>
+
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Enterprise School Management ERP</span>
+      <h1>Unified Intelligence for Modern Educational Campuses</h1>
+      <p>A complete platform connecting Owners, Principals, Educators, Students, and Parents. Scale your institutional operations from Playgroup to 12th Standard with ease.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Schedule a Platform Walkthrough</a>
+        <a href="#rbac" class="btn btn-secondary">Explore Modules</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- 1. RBAC SECTION -->
+    <section class="container" id="rbac">
+      <div class="section-header">
+        <h2>1. Role-Based Access Control (RBAC) & Authentication</h2>
+        <p>Granular permission sets securing every interaction. Clear segregation between governance, administration, and learning workflows.</p>
+      </div>
+      <div class="grid-3">
+        <!-- Owner Card -->
+        <div class="card">
+          <div class="card-icon">👑</div>
+          <h3>Owner / Principal</h3>
+          <p>Complete macro-oversight and governance authority across the institutional group.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>System Control:</strong> Define institution-wide policies, academic sessions, and fiscal years.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Strategic Dashboards:</strong> View real-time aggregated cashflows, school rankings, and operational KPIs.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Audit Authorization:</strong> Access audit logs, inspect system overrides, and approve high-value procurement.</span></li>
+          </ul>
+        </div>
+        <!-- Admin Card -->
+        <div class="card">
+          <div class="card-icon">👨‍🏫</div>
+          <h3>Admin / Teacher</h3>
+          <p>Day-to-day operations and classroom workflow orchestrators with targeted administrative access.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Academic Execution:</strong> Mark student attendance, manage daily period logs, and create syllabi.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Assessment Entry:</strong> Input assessment grades, publish term results, and assign homework.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Operational Actions:</strong> Raise fee reminders, manage inventory issues, and answer guardian queries.</span></li>
+          </ul>
+        </div>
+        <!-- User Card -->
+        <div class="card">
+          <div class="card-icon">🎒</div>
+          <h3>User (Student / Parent)</h3>
+          <p>Self-service portal granting students and parents complete visibility into their academic lifecycle.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Academic Tracking:</strong> Review class schedules, download assignments, and view terminal marksheets.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Financial Self-Service:</strong> Pay term fees securely online, view dues ledger, and download tax receipts.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Interaction:</strong> Apply for leaves, track school transport in real time, and message subject teachers.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CORE ACADEMIC & STUDENT MODULES -->
+    <section class="container" id="academics">
+      <div class="section-header">
+        <h2>2. Core Academic & Student Modules</h2>
+        <p>The foundational bedrock for student lifecycle management and daily educational delivery.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">🗂️</div>
+          <h3>Student Information System (SIS)</h3>
+          <p>A centralized single source of truth for all student profile data from enrollment to graduation.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>360° Profiles:</strong> Store admission documents, parent details, disciplinary logs, and emergency contacts.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Enrollment & Transfer:</strong> Handle admissions, generate digital Transfer Certificates (TC), and track promotions.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">👥</div>
+          <h3>Class, Section & Subject Allocation</h3>
+          <p>Dynamic structure configuration allowing complex subject-teacher mapping.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Roster Segregation:</strong> Distribute students into sections based on capacity or optional subject choices.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Workload Distribution:</strong> Assign core and elective subjects to designated faculty without overlap.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <h3>Timetable & Scheduling</h3>
+          <p>Automated timetable conflict-resolution engine for staff, rooms, and student sections.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Conflict Prevention:</strong> Prevents double-booking teachers or specialized labs (Science, Computer).</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Substitution Matrix:</strong> Quickly assign substitute teachers when a staff member is on sudden leave.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3>Attendance Management</h3>
+          <p>Multi-channel student & staff attendance with immediate parent alerting systems.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Flexible Input:</strong> Supports manual teacher-app entry, RFID cards, or biometric integration.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Absence Workflows:</strong> Instant SMS/App notifications sent to parents for unexcused absenteeism.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. EXAMINATION & ASSESSMENT -->
+    <section class="container" id="exams">
+      <div class="section-header">
+        <h2>3. Examination, Grading & Assessment</h2>
+        <p>Comprehensive evaluations supporting continuous assessments and multi-board reporting schemes.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Grade Book & Mark Sheets</h3>
+          <p>Customizable grading schemes (GPA, percentage, letter grades, descriptive criteria).</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Board Compatibility:</strong> Configurable grading scales tailored for CBSE, ICSE, IB, or State Boards.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Weightage Math:</strong> Automated calculation of weighted averages across quizzes, midterms, and finals.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📄</div>
+          <h3>Automated Report Cards</h3>
+          <p>One-click bulk generation of customized, printable, and tamper-proof PDF report cards.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Custom Templates:</strong> Include school branding, custom remarks, skill matrix, and digital signatures.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Direct Delivery:</strong> Instantly push digital transcripts to the Parent & Student Portals upon release.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">💻</div>
+          <h3>Online Assignments & Homework</h3>
+          <p>Paperless homework assignment, tracking, and evaluation environment.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Digital Submission:</strong> Students upload text or file submissions prior to enforced deadlines.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Feedback Loop:</strong> Teachers annotate, grade, and return constructive feedback directly online.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ERP FINANCE & FEE MANAGEMENT -->
+    <section class="container" id="finance">
+      <div class="section-header">
+        <h2>4. ERP Financial & Fee Management</h2>
+        <p>Fully compliant cash, cheque, and digital payment tracking eliminating revenue leakages.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Fee Structure Configuration</h3>
+          <p>Granular rule-based fee scheduling customized for different grades, streams, and quotas.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Custom Fee Heads:</strong> Tuition, laboratory, transport, sports, and library funds configured individually.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Discounts & Waivers:</strong> Built-in support for sibling concessions, merit scholarships, and staff benefits.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧾</div>
+          <h3>Invoicing & Billing</h3>
+          <p>Automated periodic recurring invoice generation and digital receipt provisioning.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Scheduled Invoicing:</strong> Auto-generates quarterly, monthly, or annual demand notes.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Fine Engines:</strong> Automated late-fee penalties calculated automatically post-due date.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">💳</div>
+          <h3>Payment Gateway Integration</h3>
+          <p>Frictionless digital collections via Credit/Debit cards, Net Banking, and UPI.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Auto-Reconciliation:</strong> Online collections automatically marked against student dues in real time.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Receipt Downloads:</strong> Instant downloadable GST/Tax-compliant receipts for parents.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <h3>Financial Accounting & Dues Tracking</h3>
+          <p>Comprehensive ledger control, cash-flow monitoring, and default detection.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Defaulters List:</strong> Instant export of past-due balances with single-click SMS/Email reminders.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Account Books:</strong> Manage daily expenses, petty cash, and export data directly to standard accounting tools.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CAMPUS OPERATIONS & RESOURCE ERP -->
+    <section class="container" id="operations">
+      <div class="section-header">
+        <h2>5. Campus Operations & Resource ERP</h2>
+        <p>Keep the physical campus and its tangible intellectual and physical assets organized.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>Library Management System (LMS)</h3>
+          <p>Cataloging, circulation, and barcode management for physical books and electronic media.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Barcode Integration:</strong> Lightning-fast checkout, return, and inventory auditing via handheld scanners.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Overdue Management:</strong> Automatic overdue calculation with built-in fine records mapped to student dues.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📦</div>
+          <h3>Inventory & Asset Management</h3>
+          <p>Trace physical assets, track stationery consumption, and manage lab supplies.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Asset Tracking:</strong> Manage maintenance lifecycles and deprecation for smartboards, lab gear, and furniture.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Reorder Alerts:</strong> Automatically trigger low-stock notifications for daily consumables and uniforms.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COMMUNICATION & COLLABORATION -->
+    <section class="container" id="communication">
+      <div class="section-header">
+        <h2>6. Communication & Collaboration</h2>
+        <p>Break down operational silos and build an engaged, connected educational community.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">📢</div>
+          <h3>Notice Board & Announcements</h3>
+          <p>Push instant notifications, emergency circulars, and administrative memos.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Audience Targeting:</strong> Target alerts to specific classes, entire schools, or only teaching staff.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Read Receipts:</strong> Confirm which parents have viewed critical regulatory disclosures.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h3>Messaging & Query Portal</h3>
+          <p>Regulated channels between parents and teachers eliminating private phone calls.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Timed Access:</strong> Respects teacher privacy by limiting message hours to school timings.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Ticketing System:</strong> Helpdesk style ticket creation for parent complaints and administrative followups.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗓️</div>
+          <h3>Events & School Calendar</h3>
+          <p>Centralized master calendar detailing academic, co-curricular, and holiday events.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Live Sync:</strong> Synchronize term dates, sports days, and exam schedules with Google/Apple calendars.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>RSVP Gathering:</strong> Coordinate parent attendance for annual exhibitions and PTA assemblies.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ADMINISTRATIVE ANALYTICS & REPORTING -->
+    <section class="container" id="analytics">
+      <div class="section-header">
+        <h2>7. Administrative Analytics & Reporting</h2>
+        <p>Make data-backed executive decisions with enterprise-grade operational transparency.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">📉</div>
+          <h3>Executive Dashboards</h3>
+          <p>Real-time visual summaries across high-stakes administrative health metrics.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Enrolled Students Counter:</strong> Live headcount tracked by gender, category, and class.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Attendance Metrics:</strong> Daily trendlines for both student attendance and staff absenteeism.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Operational Ratios:</strong> Active monitoring of student-to-teacher ratio (STR) for regulatory compliance.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">📤</div>
+          <h3>Exportable Data Engine</h3>
+          <p>Instant tabular extraction formatted for compliance audits and government portals.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Multi-format Support:</strong> Export any table or report directly into Excel (.xlsx), CSV, or secure PDF.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Mandatory Portals:</strong> Pre-built formatting matching regulatory education board schemas.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Audit Logs & Governance</h3>
+          <p>Immutable event logging safeguarding against fraudulent changes and unauthorized access.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Contextual Metadata:</strong> Every mark modification, deletion, or fee adjustment is recorded with User ID, Timestamp, and IP.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Security Monitoring:</strong> Automated alerts on irregular password attempts or mass data exports.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADDITIONAL K-12 SPECIFIC MODULES -->
+    <section class="container" id="k12">
+      <div class="section-header">
+        <h2>Dedicated K-12 School Modules</h2>
+        <p>Specialized modules designed specifically to address the daily operational realities of schools up to 12th standard.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">👨‍👩‍👧</div>
+          <h3>Parent Portal <span class="k12-badge">K-12</span></h3>
+          <p>Total transparency into their child's holistic educational journey.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span>Direct access to progress reports, term scores, and attendance percentage.</span></li>
+            <li><span class="check-bullet">✓</span> <span>Instant fee payments, ledger downloads, and direct communication with subject mentors.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">👩‍🏫</div>
+          <h3>Teacher Portal <span class="k12-badge">K-12</span></h3>
+          <p>Eliminate repetitive administration so teachers can focus on pedagogy.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span>Digital lesson planning, curriculum pacing monitors, and syllabus trackers.</span></li>
+            <li><span class="check-bullet">✓</span> <span>Quick-swipe attendance logging and direct grade book score entries.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚌</div>
+          <h3>Transport Management <span class="k12-badge">K-12</span></h3>
+          <p>Safe transit management and peace of mind for parents.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span>Bus route optimization, vehicle driver allocations, and stops mapping.</span></li>
+            <li><span class="check-bullet">✓</span> <span>Live student boarding, pickup, and drop alerts with telematics integration.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛏️</div>
+          <h3>Hostel & Accommodation <span class="k12-badge">K-12</span></h3>
+          <p>Residential student oversight for boarding and semi-boarding schools.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span>Room, wing, and bed allocation with warden assignment workflows.</span></li>
+            <li><span class="check-bullet">✓</span> <span>Residential fee scheduling, gate-pass issuance, and visitor log registry.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🩺</div>
+          <h3>Health & Medical Records <span class="k12-badge">K-12</span></h3>
+          <p>Campus infirmary management and health profiles.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span>Catalog allergies, chronic conditions, blood groups, and vaccination histories.</span></li>
+            <li><span class="check-bullet">✓</span> <span>Infirmary visit logs, medication distribution tracking, and incident reports.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3>Alumni Management <span class="k12-badge">K-12</span></h3>
+          <p>Maintain an active community of graduated alumni batches.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span>Centralized registry of past students, higher education destinations, and contact books.</span></li>
+            <li><span class="check-bullet">✓</span> <span>Alumni event management, guest lectures, and institutional donation drives.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Multi-Language Support <span class="k12-badge">K-12</span></h3>
+          <p>Inclusive access bridging cultural and regional communication gaps.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span>Seamless toggle between English and regional language UI for portal access.</span></li>
+            <li><span class="check-bullet">✓</span> <span>Regional SMS and push notifications for improved parent engagement.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW CONTACT INFO BANNER (REPLACES OLD DEMO PIC BOX) -->
+    <section class="container" id="contact" style="padding-top: 1rem;">
+      <div class="contact-banner">
+        <h2>Get In Touch With Us</h2>
+        <p class="subtext">Have questions or want to set up EduPulse ERP for your institution? Reach out directly via call, WhatsApp, or email.</p>
+
+        <div class="contact-grid">
+          <!-- Phone Card -->
+          <div class="contact-pill">
+            <div class="pill-icon">📞</div>
+            <div>
+              <div class="label">Mobile & WhatsApp</div>
+              <a href="tel:+918009628785" class="value">+91 8009628785</a>
+            </div>
+          </div>
+
+          <!-- Email Card -->
+          <div class="contact-pill">
+            <div class="pill-icon">✉️</div>
+            <div>
+              <div class="label">Official Email</div>
+              <a href="mailto:apal15685@gmail.com" class="value">apal15685@gmail.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <a href="tel:+918009628785" class="btn btn-call">
+            <span>Direct Call</span> ↗
+          </a>
+          <a href="https://wa.me/918009628785" target="_blank" class="btn btn-call" style="background-color: #25D366;">
+            <span>WhatsApp</span> ↗
+          </a>
+          <a href="mailto:apal15685@gmail.com" class="btn btn-mail">
+            <span>Send Email</span> ✉
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="padding: 0;">
+      <p>&copy; 2026 EduPulse ERP Solutions. All rights reserved.</p>
+      <p style="margin-top: 0.4rem; font-size: 0.85rem;">
+        Contact: <a href="tel:+918009628785">+91 8009628785</a> | <a href="mailto:apal15685@gmail.com">apal15685@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT: NAVIGATION & DARK MODE LOGIC -->
+  <script>
+    // Responsive Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Dark / Light Mode Toggle with Persistence
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    // Load user choice or default to light
+    const savedTheme = localStorage.getItem('edupulse-theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeIcon.textContent = '☀️';
+    } else {
+      themeIcon.textContent = '🌙';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('edupulse-theme', 'light');
+        themeIcon.textContent = '🌙';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('edupulse-theme', 'dark');
+        themeIcon.textContent = '☀️';
+      }
+    });
+  </script>
+</body>
+</html>
