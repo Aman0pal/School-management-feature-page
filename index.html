@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EduPulse ERP | Next-Gen School Management Platform</title>
   <style>
-    /* --- CSS RESET & COLOR THEMES (LIGHT & DARK) --- */
+    /* --- CSS RESET & COLOR THEMES (LIGHT & TRUE BLACK DARK) --- */
     :root {
       --primary: #2563eb;
       --primary-light: #3b82f6;
@@ -31,21 +31,21 @@
     [data-theme="dark"] {
       --primary: #38bdf8;
       --primary-light: #60a5fa;
-      --primary-soft: #0c213d;
+      --primary-soft: #111111;
       --secondary: #f8fafc;
       --accent: #34d399;
-      --accent-soft: #063d27;
-      --text: #cbd5e1;
+      --accent-soft: #052e16;
+      --text: #e2e8f0;
       --text-muted: #94a3b8;
-      --bg: #0b1329;
-      --card-bg: #132238;
-      --border: #1e3352;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      --shadow-hover: 0 16px 28px -4px rgba(56, 189, 248, 0.18), 0 6px 12px -4px rgba(0, 0, 0, 0.3);
-      --header-bg: rgba(11, 19, 41, 0.92);
-      --hero-bg: radial-gradient(circle at 50% 0%, #172d54 0%, #0b1329 80%);
-      --contact-gradient: linear-gradient(135deg, #0f172a 0%, #172554 50%, #1e3a8a 100%);
-      --contact-card-bg: rgba(255, 255, 255, 0.06);
+      --bg: #000000;
+      --card-bg: #0d0d0d;
+      --border: #222222;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.9);
+      --shadow-hover: 0 16px 28px -4px rgba(56, 189, 248, 0.2), 0 6px 14px -4px rgba(0, 0, 0, 0.8);
+      --header-bg: rgba(0, 0, 0, 0.88);
+      --hero-bg: radial-gradient(circle at 50% 0%, #141414 0%, #000000 85%);
+      --contact-gradient: linear-gradient(135deg, #0a0a0a 0%, #171717 50%, #1f2937 100%);
+      --contact-card-bg: rgba(255, 255, 255, 0.05);
     }
 
     * {
@@ -121,7 +121,6 @@
       color: var(--primary);
     }
 
-    /* Modern Circular Dark Mode Toggle Button */
     .theme-toggle-btn {
       width: 40px;
       height: 40px;
@@ -176,7 +175,6 @@
       background-color: var(--primary-soft);
     }
 
-    /* Mobile Menu Toggle */
     .menu-toggle {
       display: none;
       flex-direction: column;
@@ -264,6 +262,12 @@
     .section-header p {
       color: var(--text-muted);
       font-size: 1rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
 
     .grid-3 {
@@ -356,15 +360,15 @@
       margin-left: 0.5rem;
     }
 
-    /* --- REPLACED SECTION: PREMIUM CONTACT INFO BANNER --- */
+    /* --- CONTACT INFO BANNER --- */
     .contact-banner {
       background: var(--contact-gradient);
       color: #ffffff;
       border-radius: 20px;
       padding: 3.5rem 2rem;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.7);
       position: relative;
       overflow: hidden;
     }
@@ -376,7 +380,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -388,7 +392,7 @@
     }
 
     .contact-banner p.subtext {
-      color: #e2e8f0;
+      color: #cbd5e1;
       max-width: 620px;
       margin: 0 auto 2.5rem;
       font-size: 1.05rem;
@@ -405,7 +409,7 @@
     .contact-pill {
       background: var(--contact-card-bg);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 14px;
       padding: 1.25rem 2rem;
       display: flex;
@@ -417,7 +421,7 @@
 
     .contact-pill:hover {
       transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.16);
       border-color: #ffffff;
     }
 
@@ -525,7 +529,7 @@
       .menu-toggle {
         display: flex;
       }
-      .grid-3, .grid-2 {
+      .grid-4, .grid-3, .grid-2 {
         grid-template-columns: 1fr;
       }
       .contact-grid {
@@ -555,6 +559,7 @@
         </button>
 
         <ul class="nav-links" id="navLinks">
+          <li><a href="#portal-home">Home Portal</a></li>
           <li><a href="#rbac">Access Roles</a></li>
           <li><a href="#academics">Academics</a></li>
           <li><a href="#exams">Assessment</a></li>
@@ -581,16 +586,73 @@
       <p>A complete platform connecting Owners, Principals, Educators, Students, and Parents. Scale your institutional operations from Playgroup to 12th Standard with ease.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary">Schedule a Platform Walkthrough</a>
-        <a href="#rbac" class="btn btn-secondary">Explore Modules</a>
+        <a href="#portal-home" class="btn btn-secondary">Explore Modules</a>
       </div>
     </div>
   </section>
 
   <main>
-    <!-- 1. RBAC SECTION -->
+    <!-- 1. PUBLIC SCHOOL PORTAL & HOMEPAGE SHOWCASE (NEW) -->
+    <section class="container" id="portal-home">
+      <div class="section-header">
+        <h2>1. School Homepage & Public Portal</h2>
+        <p>A dynamic, mobile-ready digital front door displaying your school's legacy, faculty credentials, academic honors, and seamless online admissions.</p>
+      </div>
+      <div class="grid-4">
+        <!-- a. Toppers Pic -->
+        <div class="card">
+          <div class="card-icon">🏆</div>
+          <h3>10th & 12th Toppers Showcase</h3>
+          <p>Highlight top board exam performers and institutional merit rank holders with prominent visual galleries.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Hall of Fame:</strong> Display high-resolution photos, board percentages, and subject-wise toppers.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Stream Filter:</strong> Filter toppers by Science, Commerce, Arts, or 10th standard board results.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Social Sharing:</strong> Direct export of celebration badges for social media and parent recognition.</span></li>
+          </ul>
+        </div>
+
+        <!-- b. Registration -->
+        <div class="card">
+          <div class="card-icon">📝</div>
+          <h3>Online Admission & Registration</h3>
+          <p>Self-service admission pipeline converting public website visitors directly into enrolled records.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Digital Form:</strong> Collect applicant details, birth certificate scans, and previous school transfer docs.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Application Fee:</strong> Collect initial prospectus or entrance exam fee via integrated UPI/Card gateways.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Status Tracker:</strong> Allow parents to track admission approval, lottery status, or interview schedules.</span></li>
+          </ul>
+        </div>
+
+        <!-- c. About Teacher -->
+        <div class="card">
+          <div class="card-icon">🧑‍🏫</div>
+          <h3>Faculty Directory & Profiles</h3>
+          <p>Transparent showcase of your pedagogical leadership, teacher qualifications, and experience.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Staff Bios:</strong> Highlight teacher degrees (B.Ed, M.Sc, Ph.D), years of experience, and subjects taught.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Department Hierarchy:</strong> Department Heads, coordinators, and subject mentor classifications.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Teacher Accolades:</strong> Spotlight national, state, or institutional teaching awards and achievements.</span></li>
+          </ul>
+        </div>
+
+        <!-- d. About School -->
+        <div class="card">
+          <div class="card-icon">🏛️</div>
+          <h3>About School & Legacy</h3>
+          <p>Tell your institution's journey, vision, facilities, and board affiliations clearly.</p>
+          <ul class="sub-features">
+            <li><span class="check-bullet">✓</span> <span><strong>Vision & Mission:</strong> Principal's address, founder's message, and long-term educational roadmap.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Campus Tour:</strong> Gallery highlights for robotics labs, sports complexes, libraries, and smart classrooms.</span></li>
+            <li><span class="check-bullet">✓</span> <span><strong>Affiliation Badges:</strong> Display official CBSE, ICSE, IB, or State Board affiliation certifications.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. RBAC SECTION -->
     <section class="container" id="rbac">
       <div class="section-header">
-        <h2>1. Role-Based Access Control (RBAC) & Authentication</h2>
+        <h2>2. Role-Based Access Control (RBAC) & Authentication</h2>
         <p>Granular permission sets securing every interaction. Clear segregation between governance, administration, and learning workflows.</p>
       </div>
       <div class="grid-3">
@@ -630,10 +692,10 @@
       </div>
     </section>
 
-    <!-- 2. CORE ACADEMIC & STUDENT MODULES -->
+    <!-- 3. CORE ACADEMIC & STUDENT MODULES -->
     <section class="container" id="academics">
       <div class="section-header">
-        <h2>2. Core Academic & Student Modules</h2>
+        <h2>3. Core Academic & Student Modules</h2>
         <p>The foundational bedrock for student lifecycle management and daily educational delivery.</p>
       </div>
       <div class="grid-2">
@@ -676,10 +738,10 @@
       </div>
     </section>
 
-    <!-- 3. EXAMINATION & ASSESSMENT -->
+    <!-- 4. EXAMINATION & ASSESSMENT -->
     <section class="container" id="exams">
       <div class="section-header">
-        <h2>3. Examination, Grading & Assessment</h2>
+        <h2>4. Examination, Grading & Assessment</h2>
         <p>Comprehensive evaluations supporting continuous assessments and multi-board reporting schemes.</p>
       </div>
       <div class="grid-3">
@@ -713,10 +775,10 @@
       </div>
     </section>
 
-    <!-- 4. ERP FINANCE & FEE MANAGEMENT -->
+    <!-- 5. ERP FINANCE & FEE MANAGEMENT -->
     <section class="container" id="finance">
       <div class="section-header">
-        <h2>4. ERP Financial & Fee Management</h2>
+        <h2>5. ERP Financial & Fee Management</h2>
         <p>Fully compliant cash, cheque, and digital payment tracking eliminating revenue leakages.</p>
       </div>
       <div class="grid-2">
@@ -759,10 +821,10 @@
       </div>
     </section>
 
-    <!-- 5. CAMPUS OPERATIONS & RESOURCE ERP -->
+    <!-- 6. CAMPUS OPERATIONS & RESOURCE ERP -->
     <section class="container" id="operations">
       <div class="section-header">
-        <h2>5. Campus Operations & Resource ERP</h2>
+        <h2>6. Campus Operations & Resource ERP</h2>
         <p>Keep the physical campus and its tangible intellectual and physical assets organized.</p>
       </div>
       <div class="grid-2">
@@ -787,10 +849,10 @@
       </div>
     </section>
 
-    <!-- 6. COMMUNICATION & COLLABORATION -->
+    <!-- 7. COMMUNICATION & COLLABORATION -->
     <section class="container" id="communication">
       <div class="section-header">
-        <h2>6. Communication & Collaboration</h2>
+        <h2>7. Communication & Collaboration</h2>
         <p>Break down operational silos and build an engaged, connected educational community.</p>
       </div>
       <div class="grid-3">
@@ -824,10 +886,10 @@
       </div>
     </section>
 
-    <!-- 7. ADMINISTRATIVE ANALYTICS & REPORTING -->
+    <!-- 8. ADMINISTRATIVE ANALYTICS & REPORTING -->
     <section class="container" id="analytics">
       <div class="section-header">
-        <h2>7. Administrative Analytics & Reporting</h2>
+        <h2>8. Administrative Analytics & Reporting</h2>
         <p>Make data-backed executive decisions with enterprise-grade operational transparency.</p>
       </div>
       <div class="grid-3">
@@ -935,7 +997,7 @@
       </div>
     </section>
 
-    <!-- NEW CONTACT INFO BANNER (REPLACES OLD DEMO PIC BOX) -->
+    <!-- CONTACT BANNER -->
     <section class="container" id="contact" style="padding-top: 1rem;">
       <div class="contact-banner">
         <h2>Get In Touch With Us</h2>
@@ -988,7 +1050,6 @@
 
   <!-- JAVASCRIPT: NAVIGATION & DARK MODE LOGIC -->
   <script>
-    // Responsive Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
 
@@ -1002,11 +1063,9 @@
       });
     });
 
-    // Dark / Light Mode Toggle with Persistence
     const themeToggleBtn = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
 
-    // Load user choice or default to light
     const savedTheme = localStorage.getItem('edupulse-theme') || 'light';
     if (savedTheme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
